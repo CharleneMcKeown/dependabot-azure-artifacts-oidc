@@ -1,0 +1,17 @@
+version: 2
+registries:
+  azure-artifacts:
+    type: nuget-feed
+    url: https://pkgs.dev.azure.com/<ADO_ORG>/<PROJECT>/_packaging/<FEED>/nuget/v3/index.json
+    # Use the tenant and client IDs of the Entra managed identity or app with this FIC.
+    tenant-id: <TENANT_ID>
+    client-id: <CLIENT_ID>
+    # OIDC needs no PAT, password, or client secret.
+    # Customize this repository's OIDC subject separately; see the README.
+updates:
+  - package-ecosystem: nuget
+    directory: /
+    registries:
+      - azure-artifacts
+    schedule:
+      interval: weekly
